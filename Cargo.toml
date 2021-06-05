@@ -1,20 +1,22 @@
 [package]
 name = "ARMecha-Firmware"
 version = "0.1.0"
-authors = ["Paul_GD <PaulGameDev@GitHub>", "ARMecha <ARMecha@GitHub>"]
+authors = ["ARMecha <ARMecha@GitHub>", "Guillaume Pinot <texitoi@texitoi.eu>"]
 edition = "2021"
-description = "A keyboard firmware written in Rust and C++ made specifically for ARM chips, aiming to natively support SONiX / eVision chips too!"
-repository = "https://github.com/ARMecha/ARMecha-Firmware"
-keywords = ["keyboard", "usb-device", "firmare"]
-categories = ["embedded", "no-std"]
-license = "GPLv3"
-readme = "README.md"
 
-[dependecies]
-keyberon-macros = { version = "0.1.0", path = "./keyberon-macros" }
-either = { version = "1.6", default-features = false }
-generic-array = "0.14"
-embedded-hal = { version = "0.2", features = ["unproven"] }
+[dependencies]
+stm32f4xx-hal = { version = "0.7.0", features = ["rt", "stm32f401", "usb_fs"] }
+cortex-m = "0.6"
+cortex-m-rt = { version = "0.6.10", features = ["device"] }
+panic-halt = "0.2.0"
+keyberon = { git = "https://github.com/ARMecha/keyberon" }
+cortex-m-rtic = "0.5"
+generic-array = "0.13"
+embedded-hal = "0.2"
 usb-device = "0.2.0"
-heapless = "0.5"
-arraydeque = { version = "0.4.5", default-features = false }
+
+[profile.release]
+lto = true
+incremental = false
+opt-level = "z"
+debug = true
