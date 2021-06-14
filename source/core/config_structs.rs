@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 use num_format::{Buffer, CustomFormat};
 
-macro_rules! add_cost_gen {
+macro_rules! add_const_gen {
     (
         $(#[$meta:meta])*
         pub struct $struct_name:ident {
@@ -20,16 +20,16 @@ macro_rules! add_cost_gen {
         }
 
         impl $struct_name {
-            #[allowed(dead_code)]
+            #[allow(dead_code)]
             fn field_names() -> &'static [&'static str] {
                 static NAMES: &'static [&'static str] = &[$(stringify!($field_name)),*];
                 NAMES
             }
 
-            #[allowed(dead_code)]
+            #[allow(dead_code)]
             fn gen_meta_tuple(&self, field: &'static str) -> (&str, &str, &str, Buffer) {
                 let rust_format = CustomFormat::builder()
-                    .seperator("_")
+                    .separator("_")
                     .build().unwrap();
                 match field {
                     $(stringify!($field_name) => {
