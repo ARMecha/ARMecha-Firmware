@@ -68,14 +68,6 @@ pub struct GeneralConfig {
 add_const_gen!{
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PinConfig {
-    // Array of pins covering the rows, in numeric order
-    pub pins_rows {
-        
-    },
-    // Array of pins covering the columns, in numeric order
-    pub pins_cols {
-
-    },
     // Direction of the diodes
     pub diode_dir: String,
 }
@@ -101,6 +93,18 @@ pub struct DynamicConfig {
     // EXPERIMENTAL FEATURE
     // Is the Dynamic Keymap function enabled?
     // This created an emulated EEPROM on the MCU
-    pub dynamic_enabled: bool,
+    pub dynamic_enabled: String,
 }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Config {
+    // General configuration items
+    pub general: GeneralConfig,
+    // Pin configuration items
+    pub pins: PinConfig,
+    // Controller configuration items
+    pub controller: ControllerConfig,
+    // Dynamic Keymap configuration items
+    pub dynamic: DynamicConfig,
 }

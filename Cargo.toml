@@ -1,3 +1,5 @@
+cargo-features = ["edition2021"]
+
 [package]
 name = "ARMecha-Firmware"
 version = "0.1.0"
@@ -6,7 +8,6 @@ edition = "2021"
 
 [dependencies]
 stm32f4xx-hal = { version = "0.9.0", features = ["rt", "stm32f401", "usb_fs"] }
-#stm32-hal2 = "0.2.8"
 cortex-m = "0.6"
 cortex-m-rt = { version = "0.6.10", features = ["device"] }
 cortex-m-rtic = "0.5"
@@ -15,11 +16,17 @@ keyberon = { git = "https://github.com/ARMecha/Keyberon" }
 generic-array = "0.13"
 embedded-hal = "0.2"
 usb-device = "0.2.8"
-eeprom = "0.1.0"
-toml = "0.5.8"
+toml = "0.5"
+serde = { version = "1.0", features = ["derive"] }
+num-format = "0.4.0"
 
 [profile.release]
 lto = true
 incremental = false
 opt-level = "z"
 debug = true
+
+[[bin]]
+name = "armecha-firmware"
+#path = "src/core/main.rs"
+path = "keyboards/handwired/BMMP/build.rs"

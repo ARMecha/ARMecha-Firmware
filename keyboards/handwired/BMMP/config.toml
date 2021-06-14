@@ -6,8 +6,8 @@ vid = 0xDEAD
 pid = 0xBEEF
 
 [pins]
-rows = ["A3", "A2", "A1", "B9", "B8", "B4", "B3", "A15", "A10", "A8", "B15", "B14", "B13"]
-cols = ["B10", "B1", "B0", "A7", "A6", "A5", "A4"]
+rows = ["PA3", "PA2", "PA1", "PB9", "PB8", "PB4", "PB3", "PA15", "PA10", "PA8", "PB15", "PB14", "PB13"]
+cols = ["PB10", "PB1", "PB0", "PA7", "PA6", "PA5", "PA4"]
 diode_dir = "ROW2COL"
 
 [mcu]
@@ -17,4 +17,4 @@ flash = "512K"
 ram = "128K"
 
 [dynamic_keymap]
-enable = true 
+enable = "yes"
