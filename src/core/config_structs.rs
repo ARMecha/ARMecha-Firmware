@@ -66,10 +66,24 @@ pub struct GeneralConfig {
 }
 
 add_const_gen!{
+    #[derive(Debug, Serialize, Deserialize)]
+    pub struct MatrixConfig {
+        // Amount of rows for the matrix
+        pub matrix_rows: u8,
+        // Amount of cols for the matrix
+        pub matrix_cols: u8,
+        // Directon of the diodes in the matrix
+        pub matrix_diode_dir: String,
+    }
+    }
+
+add_const_gen!{
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PinConfig {
-    // Direction of the diodes
-    pub diode_dir: String,
+    // Pins of the rows in numerical order
+    pub pins_rows: String,
+    // Pins of the cols in numerical order
+    pub pins_cols: String,
 }
 }
 
@@ -101,6 +115,8 @@ pub struct DynamicConfig {
 pub struct Config {
     // General configuration items
     pub general: GeneralConfig,
+    // Matrix configuration items
+    pub matrix: MatrixConfig,
     // Pin configuration items
     pub pins: PinConfig,
     // Controller configuration items

@@ -24,6 +24,16 @@ fn main() {
             meta.3);
         out.push_str(&const_out);
     }
+    for fname in MatrixConfig::field_names().iter() {
+        let meta = &decoded.matrix.gen_meta_tuple(fname);
+        let const_out = format!(
+            "pub const {}_{}: {} = {};\n",
+            meta.0.to_uppercase().split("CONFIG").next().unwrap(),
+            meta.1.to_uppercase(),
+            meta.2,
+            meta.3);
+        out.push_str(&const_out);
+    }
     for fname in PinConfig::field_names().iter() {
         let meta = &decoded.pins.gen_meta_tuple(fname);
         let const_out = format!(

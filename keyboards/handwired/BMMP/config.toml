@@ -5,10 +5,14 @@ device = 0x0001
 vid = 0xDEAD
 pid = 0xBEEF
 
-[pins]
-rows = ["PA3", "PA2", "PA1", "PB9", "PB8", "PB4", "PB3", "PA15", "PA10", "PA8", "PB15", "PB14", "PB13"]
-cols = ["PB10", "PB1", "PB0", "PA7", "PA6", "PA5", "PA4"]
+[matrix]
+rows = 13
+cols = 7
 diode_dir = "ROW2COL"
+
+[pins]
+row_pins = "PA3 PA2 PA1 PB9 PB8 PB4 PB3 PA15 PA10 PA8 PB15 PB14 PB13"
+col_pins = "PB10 PB1 PB0 PA7 PA6 PA5 PA4"
 
 [mcu]
 manufacturer = "STMicroelectronics"
