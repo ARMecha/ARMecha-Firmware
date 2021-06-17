@@ -1,5 +1,38 @@
 use serde::{Serialize, Deserialize};
 use num_format::{Buffer, CustomFormat};
+use core::fmt::Display;
+
+struct IsInt<'__, T>(&'__ T);
+impl<Int : ::num_format::ToFormattedStr> IsInt<'_, Int> {
+    fn pretty_display (self: Self)
+      -> impl 'static + ::core::fmt::Display
+    {
+        let ref rust_format =
+            CustomFormat::builder()
+                .separator("_")
+                .build()
+                .unwrap()
+        ;
+        let mut buf = Buffer::default();
+        buf.write_formatted(self.0, rust_format);
+        buf
+    }
+}
+
+trait Fallback<'__, T> {
+    fn pretty_display (self: Self)
+      -> &'__ T
+    ;
+}
+impl<'lt, T : ::core::fmt::Display> Fallback<'lt, T>
+    for IsInt<'lt, T>
+{
+    fn pretty_display (self: Self)
+      -> &'lt T
+    {
+        self.0
+    }
+}
 
 macro_rules! add_const_gen {
     (
@@ -25,24 +58,21 @@ macro_rules! add_const_gen {
                 static NAMES: &'static [&'static str] = &[$(stringify!($field_name)),*];
                 NAMES
             }
-
-            #[allow(dead_code)]
-            fn gen_meta_tuple(&self, field: &'static str) -> (&str, &str, &str, Buffer) {
-                let rust_format = CustomFormat::builder()
-                    .separator("_")
-                    .build().unwrap();
+            fn gen_meta_tuple (
+                self: &'_ Self,
+                field: &'static str,
+            ) -> (&'_ str, &'_ str, &'_ str, Box<dyn '_ + Display>)
+            {
                 match field {
-                    $(stringify!($field_name) => {
-                        let mut buf = Buffer::default();
-                        buf.write_formatted(&self.$field_name, &rust_format);
-                        (
-                            stringify!($struct_name),
-                            stringify!($field_name),
-                            stringify!($field_type),
-                            buf
-                        )
-                    }),*
-                    _ => ("","","",Buffer::default())
+                $(
+                    | stringify!($field_name) => (
+                        stringify!($struct_name),
+                        stringify!($field_name),
+                        stringify!($field_type),
+                        Box::new(IsInt(&self.$field_name).pretty_display()),
+                    ),
+                )*
+                    | _ => ("", "", "", Box::new("")),
                 }
             }
         }
