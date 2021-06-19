@@ -8,7 +8,7 @@ use toml;
 include!(concat!(env!("CARGO_MANIFEST_DIR"), "/src/core/config_structs.rs"));
 
 fn main() {
-    let out_dir = env::var_os("OUT_DIR").unwrap();
+    let out_dir = env::var_os("OUT_DIR");
     let dest_path = Path::new(&out_dir).join("userconfig.rs");
     let mut out = String::new();
     let contents = fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/Config.toml")).unwrap();
