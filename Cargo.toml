@@ -19,6 +19,7 @@ usb-device = "0.2.8"
 toml = "0.5"
 serde = { version = "1.0", features = ["derive"] }
 num-format = "0.4.0"
+relative-path = "0.3.4"
 
 [profile.release]
 lto = true
@@ -28,5 +29,4 @@ debug = true
 
 [[bin]]
 name = "armecha-firmware"
-#path = "src/core/main.rs"
-path = "keyboards/handwired/BMMP/build.rs"
+path = "src/main.rs"
