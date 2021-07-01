@@ -7,7 +7,7 @@ use toml;
 
 include!(concat!(env!("CARGO_MANIFEST_DIR"), "/src/config_structs.rs"));
 
-fn gen_build() {
+pub(crate) fn gen_build() {
     let out_dir = env::var_os("OUT_DIR");
     let dest_path = Path::new("userconfig.rs");
     let mut out = String::new();
