@@ -21,4 +21,4 @@ flash = "512K"
 ram = "128K"
 
 [dynamic_keymap]
-enable = "yes"
+dynamic_enabled = "yes"

@@ -83,15 +83,15 @@ add_const_gen!{
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GeneralConfig {
     // Name of the keyboard
-    pub keyboard_name: String,
+    pub name: String,
     // Author / vendor of the keyboard
-    pub keyboard_author: String,
+    pub author: String,
     // Device ID of the keyboard
-    pub keyboard_device: u16,
+    pub device: u16,
     // Vendor ID of the keyboard
-    pub keyboard_vid: u16,
+    pub vid: u16,
     // Product ID of the keyboard
-    pub keyboard_pid: u16,
+    pub pid: u16,
 }
 }
 
@@ -99,11 +99,11 @@ add_const_gen!{
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MatrixConfig {
     // Amount of rows for the matrix
-    pub matrix_rows: u8,
+    pub rows: u8,
     // Amount of cols for the matrix
-    pub matrix_cols: u8,
+    pub cols: u8,
     // Directon of the diodes in the matrix
-    pub matrix_diode_dir: String,
+    pub diode_dir: String,
 }
 }
 
@@ -111,9 +111,9 @@ add_const_gen!{
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PinConfig {
     // Pins of the rows in numerical order
-    pub pins_rows: String,
+    pub row_pins: String,
     // Pins of the cols in numerical order
-    pub pins_cols: String,
+    pub col_pins: String,
 }
 }
 
@@ -121,13 +121,13 @@ add_const_gen!{
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ControllerConfig {
     // Manufacturer of the MCU used in the device
-    pub mcu_manu: String,
+    pub manufacturer: String,
     // Family of the MCU
-    pub mcu_family: String,
+    pub family: String,
     // Size of the specific MCU's FLASH
-    pub mcu_flash: String,
+    pub flash: String,
     // Size of the specific MCU's RAM
-    pub mcu_ram: String,
+    pub ram: String,
 }
 }
 
@@ -150,7 +150,7 @@ pub struct Config {
     // Pin configuration items
     pub pins: PinConfig,
     // Controller configuration items
-    pub controller: ControllerConfig,
+    pub mcu: ControllerConfig,
     // Dynamic Keymap configuration items
-    pub dynamic: DynamicConfig,
+    pub dynamic_keymap: DynamicConfig,
 }
