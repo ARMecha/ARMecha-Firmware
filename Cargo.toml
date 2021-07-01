@@ -16,10 +16,14 @@ keyberon = { git = "https://github.com/ARMecha/Keyberon" }
 generic-array = "0.13"
 embedded-hal = "0.2"
 usb-device = "0.2.8"
-toml = "0.5"
-serde = { version = "1.0", features = ["derive"] }
-num-format = "0.4.0"
 relative-path = "0.3.4"
+
+
+[build-dependencies]
+heapless = "0.6"
+num-format = { version = "0.4", default-features = false }
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.5"
 
 [profile.release]
 lto = true

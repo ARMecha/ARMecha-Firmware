@@ -9,7 +9,7 @@ include!(concat!(env!("CARGO_MANIFEST_DIR"), "/src/config_structs.rs"));
 
 pub(crate) fn gen_build() {
     let out_dir = env::var_os("OUT_DIR");
-    let dest_path = Path::new("userconfig.rs");
+    let dest_path = Path::new(&out_dir).join("userconfig.rs");
     let mut out = String::new();
     let contents = fs::read_to_string(concat!("Config.toml")).unwrap();
     let decoded: Config = toml::from_str(&contents[..]).unwrap();
